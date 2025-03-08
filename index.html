@@ -20,129 +20,119 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    
+
     <!-- Background music implementation with auto-start after user interaction -->
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        // Replace the existing script for background music with this improved version
+        document.addEventListener('DOMContentLoaded', function () {
             // Create the music player after page load
             setTimeout(createBackgroundMusic, 1000);
-            
+
             // Set up toggle button functionality
             const musicBtn = document.getElementById('musicToggle');
             if (musicBtn) {
                 musicBtn.addEventListener('click', toggleBackgroundMusic);
-                
+
                 // Show button after a short delay
-                setTimeout(function() {
+                setTimeout(function () {
                     musicBtn.style.display = 'block';
-                    // Set initial button state to "Music On"
-                    musicBtn.innerHTML = '🎵 Music On';
-                    musicBtn.classList.remove('music-off');
-                    musicBtn.classList.add('music-on');
+                    // Set initial button state to "Music Off" since we don't auto-play
+                    musicBtn.innerHTML = '🔇 Music Off';
+                    musicBtn.classList.remove('music-on');
+                    musicBtn.classList.add('music-off');
                 }, 1500);
             }
         });
-        
-        // Tracks music state - set to true by default
-        let musicPlaying = true;
-        
+
+        // Tracks music state - set to false by default (don't auto-play)
+        let musicPlaying = false;
+
         // Creates the background music audio element
         function createBackgroundMusic() {
             const container = document.getElementById('backgroundMusic');
             if (!container) return;
-            
+
             // Clear any existing content
             container.innerHTML = '';
-            
+
             // Create audio element
             const audio = document.createElement('audio');
             audio.id = 'backgroundAudio';
             audio.loop = true;
+            // Important: Use auto instead of none to start loading the audio file
             audio.preload = 'auto';
             audio.style.display = 'none';
-            
+
             // Add source for the audio - using local file
             const source = document.createElement('source');
             source.src = 'audio.mp3';
             source.type = 'audio/mpeg';
-            
+
             audio.appendChild(source);
             container.appendChild(audio);
-            
+
             // Store reference to audio element
             window.backgroundAudio = audio;
-            
+
             // Add listener for user interaction to enable audio
             document.addEventListener('click', function userInteractionHandler() {
-                // Only trigger once
-                document.removeEventListener('click', userInteractionHandler);
-                
-                // Try to play audio automatically after first user interaction
-                const audio = window.backgroundAudio;
-                if (audio) {
-                    const playPromise = audio.play();
-                    
-                    if (playPromise !== undefined) {
-                        playPromise.then(_ => {
-                            // Playback started successfully
-                            musicPlaying = true;
-                            updateMusicButton(true);
-                        })
-                        .catch(error => {
-                            // Auto-play was prevented
-                            console.log("Playback prevented by browser. User interaction required.", error);
-                            musicPlaying = false;
-                            updateMusicButton(false);
-                        });
-                    }
-                }
-                
-                // Show the music button
+                // Only show the music button after first interaction
+                // Don't try to auto-play
                 const musicBtn = document.getElementById('musicToggle');
                 if (musicBtn) {
                     musicBtn.style.display = 'block';
                 }
             }, { once: true });
         }
-        
+
         // Toggles music on/off
         function toggleBackgroundMusic() {
             const audio = window.backgroundAudio;
-            const musicBtn = document.getElementById('musicToggle');
-            
+
             if (!audio) return;
-            
-            musicPlaying = !musicPlaying;
-            
-            if (musicPlaying) {
-                // Play audio
+
+            if (!musicPlaying) {
+                // Only try to play audio when the user explicitly requests it
                 const playPromise = audio.play();
-                
-                // Handle play promise (required for modern browsers)
+
                 if (playPromise !== undefined) {
                     playPromise.then(_ => {
                         // Playback started successfully
+                        musicPlaying = true;
                         updateMusicButton(true);
                     })
-                    .catch(error => {
-                        // Auto-play was prevented
-                        console.log("Playback prevented by browser. User interaction required.", error);
-                        musicPlaying = false;
-                        updateMusicButton(false);
-                    });
+                        .catch(error => {
+                            // Play was prevented
+                            console.log("Playback failed:", error);
+                            musicPlaying = false;
+                            updateMusicButton(false);
+
+                            // Check if the audio source exists
+                            fetch('audio.mp3')
+                                .then(response => {
+                                    if (!response.ok) {
+                                        console.log("Audio file not found. Status:", response.status);
+                                        alert("Background music file couldn't be loaded. Please check if 'audio.mp3' exists.");
+                                    }
+                                })
+                                .catch(err => {
+                                    console.error("Error checking audio file:", err);
+                                });
+                        });
                 }
             } else {
                 // Pause audio
                 audio.pause();
+                musicPlaying = false;
                 updateMusicButton(false);
             }
         }
-        
+
         // Update button appearance
         function updateMusicButton(isPlaying) {
             const musicBtn = document.getElementById('musicToggle');
             if (!musicBtn) return;
-            
+
             if (isPlaying) {
                 musicBtn.innerHTML = '🎵 Music On';
                 musicBtn.classList.remove('music-off');
@@ -159,10 +149,10 @@
 <body>
     <!-- Hidden player container -->
     <div id="backgroundMusic"></div>
-    
+
     <!-- Music control button -->
     <button id="musicToggle" class="music-control music-off" style="display: none;">🔇 Music Off</button>
-    
+
     <header class="header">
         <div class="profile-picture">
             <img src="profile.jpeg" alt="Micael Santana">
@@ -170,14 +160,19 @@
         <h1>Micael Santana</h1>
         <h2>Senior Software Engineer</h2>
         <div class="contact-info">
-            <p>📍 Blumenau, Santa Catarina, Brazil | 📞 <a href="https://api.whatsapp.com/send?phone=5547996428339" target="_blank">+55 47 996428339</a></p>
+            <p>📍 Blumenau, Santa Catarina, Brazil | 📞 <a href="https://api.whatsapp.com/send?phone=5547996428339"
+                    target="_blank">+55 47 996428339</a></p>
             <p>📧 micaelparadox@gmail.com | 🔗 <a href="https://linkedin.com/in/micasan">linkedin.com/in/micasan</a></p>
         </div>
     </header>
 
     <section class="summary">
         <h3>Summary</h3>
-        <p>Senior Software Engineer with over 11 years of experience in IT, specializing in Cloud Computing, Data Engineering, Cybersecurity, and Legacy Modernization. Proven expertise in Java, Microservices, Spring Boot, Apache Beam, Airflow, and GCP Dataflow, delivering high-performance distributed systems in agile and DevOps-driven environments. Adept at building scalable, secure architectures and optimizing CI/CD pipelines to improve development efficiency.</p>
+        <p>Senior Software Engineer with over 11 years of experience in IT, specializing in Cloud Computing, Data
+            Engineering, Cybersecurity, and Legacy Modernization. Proven expertise in Java, Microservices, Spring Boot,
+            Apache Beam, Airflow, and GCP Dataflow, delivering high-performance distributed systems in agile and
+            DevOps-driven environments. Adept at building scalable, secure architectures and optimizing CI/CD pipelines
+            to improve development efficiency.</p>
     </section>
 
     <section class="skills">
@@ -185,7 +180,8 @@
         <div class="skill-categories">
             <div>
                 <h4>Proficient</h4>
-                <p>Java, Spring Boot, Kubernetes, Docker, AWS, Apache Spark, Apache Beam, Apache Airflow, GCP Dataflow, PostgreSQL</p>
+                <p>Java, Spring Boot, Kubernetes, Docker, AWS, Apache Spark, Apache Beam, Apache Airflow, GCP Dataflow,
+                    PostgreSQL</p>
             </div>
             <div>
                 <h4>Intermediate</h4>
@@ -209,13 +205,19 @@
             </div>
             <p class="location">United States – Remote</p>
             <ul>
-                <li>Optimized financial transaction processing and risk assessment by 75%, integrating middleware with SAP S/4HANA Finance and SAP FSCM (Financial Supply Chain Management)</li>
-                <li>Developed scalable APIs to enable seamless communication between SAP ERP modules and external banking systems</li>
-                <li>Implemented CI/CD pipelines, streamlining deployments for SAP-based applications and enhancing system reliability</li>
-                <li>Ensured secure and efficient operations using JBoss EAP, SSH, and Bash, improving integration with SAP's enterprise landscape</li>
-                <li>Monitored and optimized system performance using Dynatrace, ensuring stability and responsiveness of critical SAP financial applications</li>
+                <li>Optimized financial transaction processing and risk assessment by 75%, integrating middleware with
+                    SAP S/4HANA Finance and SAP FSCM (Financial Supply Chain Management)</li>
+                <li>Developed scalable APIs to enable seamless communication between SAP ERP modules and external
+                    banking systems</li>
+                <li>Implemented CI/CD pipelines, streamlining deployments for SAP-based applications and enhancing
+                    system reliability</li>
+                <li>Ensured secure and efficient operations using JBoss EAP, SSH, and Bash, improving integration with
+                    SAP's enterprise landscape</li>
+                <li>Monitored and optimized system performance using Dynatrace, ensuring stability and responsiveness of
+                    critical SAP financial applications</li>
             </ul>
-            <p class="technologies"><strong>Technologies:</strong> Java, Spring Framework, SAP S/4HANA, SAP FSCM, API Development, CI/CD, JBoss EAP, Secure Shell (SSH), Bash, Dynatrace, Microservices</p>
+            <p class="technologies"><strong>Technologies:</strong> Java, Spring Framework, SAP S/4HANA, SAP FSCM, API
+                Development, CI/CD, JBoss EAP, Secure Shell (SSH), Bash, Dynatrace, Microservices</p>
         </article>
 
         <!-- Mercedes-Benz -->
@@ -227,12 +229,17 @@
             <p class="location">Germany – Remote</p>
             <ul>
                 <li>Automated deployment processes across 100+ microservices, increasing productivity by 25%</li>
-                <li>Spearheaded the migration of legacy COBOL systems to Java, reducing downtime and enhancing operational processes</li>
-                <li>Implemented robust security protocols and compliance standards (SOC2, GDPR) across microservices architecture, reducing vulnerability risks by 40%</li>
-                <li>Led a team of 5 engineers in developing cloud-native applications, improving service reliability from 99.5% to 99.9%</li>
-                <li>Collaborated with cross-functional teams to integrate automotive systems with cloud services, enhancing vehicle connectivity features</li>
+                <li>Spearheaded the migration of legacy COBOL systems to Java, reducing downtime and enhancing
+                    operational processes</li>
+                <li>Implemented robust security protocols and compliance standards (SOC2, GDPR) across microservices
+                    architecture, reducing vulnerability risks by 40%</li>
+                <li>Led a team of 5 engineers in developing cloud-native applications, improving service reliability
+                    from 99.5% to 99.9%</li>
+                <li>Collaborated with cross-functional teams to integrate automotive systems with cloud services,
+                    enhancing vehicle connectivity features</li>
             </ul>
-            <p class="technologies"><strong>Technologies:</strong> Java, Python, Go, Apache Kafka, Apache Beam, Kubernetes, GCP Dataflow, AWS, Docker, CI/CD, Terraform</p>
+            <p class="technologies"><strong>Technologies:</strong> Java, Python, Go, Apache Kafka, Apache Beam,
+                Kubernetes, GCP Dataflow, AWS, Docker, CI/CD, Terraform</p>
         </article>
 
         <!-- Grupo Dataclick -->
@@ -243,7 +250,8 @@
             </div>
             <p class="location">Itajaí, Brazil – Remote</p>
             <ul>
-                <li>Designed and deployed a secure internal payment gateway, improving transaction success rates by 40%</li>
+                <li>Designed and deployed a secure internal payment gateway, improving transaction success rates by 40%
+                </li>
                 <li>Enhanced customer satisfaction, leading to the adoption of the solution by over 1,500 clients</li>
                 <li>Built and optimized robust APIs, integrating banking applications and payment systems</li>
                 <li>Optimized data pipelines with Apache Airflow, reducing data processing latency</li>
@@ -260,8 +268,10 @@
             <p class="location">Brazil</p>
             <ul>
                 <li>Delivered full-stack development for web-based applications, utilizing Java, JSP, and MySQL</li>
-                <li>Improved user experience by implementing modern HTML and CSS standards, increasing system usability</li>
-                <li>Supported the development of critical enterprise systems, ensuring high-quality code and performance</li>
+                <li>Improved user experience by implementing modern HTML and CSS standards, increasing system usability
+                </li>
+                <li>Supported the development of critical enterprise systems, ensuring high-quality code and performance
+                </li>
             </ul>
             <p class="technologies"><strong>Technologies:</strong> Java, MySQL, JSP</p>
         </article>
@@ -272,7 +282,8 @@
         <div class="education-item">
             <h4>Bachelor of Computer Science</h4>
             <p>Universidade do Vale do Itajaí, Santa Catarina, Brazil · Jan 2015 - Dec 2019</p>
-            <p><em>Started career in technology with strong practical experience before formalizing education while continuing to work full-time</em></p>
+            <p><em>Started career in technology with strong practical experience before formalizing education while
+                    continuing to work full-time</em></p>
         </div>
     </section>
 
@@ -296,9 +307,9 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const ctx = document.getElementById('careerChart').getContext('2d');
-            
+
             const careerChart = new Chart(ctx, {
                 type: 'line',
                 data: {
