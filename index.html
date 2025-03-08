@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Senior Software Engineer specializing in Cloud Computing, Data Engineering, Cybersecurity, and Legacy Modernization. Expert in Java, Microservices, Spring Boot, Apache Beam, and GCP Dataflow.">
+    <meta name="keywords"
+        content="Software Engineer, Java, Spring Boot, Kubernetes, AWS, Cloud Computing, Data Engineering, Microservices, Cybersecurity, Legacy Modernization">
+    <meta name="author" content="Micael Santana">
+    <meta property="og:title" content="Micael Santana - Senior Software Engineer">
+    <meta property="og:description"
+        content="Senior Software Engineer with over 11 years of experience in IT, specializing in Cloud Computing, Data Engineering, Cybersecurity, and Legacy Modernization.">
+    <meta property="og:image" content="profile.jpeg">
+    <meta property="og:url" content="https://linkedin.com/in/micasan">
+    <meta name="robots" content="index, follow">
+    <title>Micael Santana | Software Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Background music implementation with auto-start after user interaction -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Create the music player after page load
+            setTimeout(createBackgroundMusic, 1000);
+            
+            // Set up toggle button functionality
+            const musicBtn = document.getElementById('musicToggle');
+            if (musicBtn) {
+                musicBtn.addEventListener('click', toggleBackgroundMusic);
+                
+                // Show button after a short delay
+                setTimeout(function() {
+                    musicBtn.style.display = 'block';
+                    // Set initial button state to "Music On"
+                    musicBtn.innerHTML = '🎵 Music On';
+                    musicBtn.classList.remove('music-off');
+                    musicBtn.classList.add('music-on');
+                }, 1500);
+            }
+        });
+        
+        // Tracks music state - set to true by default
+        let musicPlaying = true;
+        
+        // Creates the background music audio element
+        function createBackgroundMusic() {
+            const container = document.getElementById('backgroundMusic');
+            if (!container) return;
+            
+            // Clear any existing content
+            container.innerHTML = '';
+            
+            // Create audio element
+            const audio = document.createElement('audio');
+            audio.id = 'backgroundAudio';
+            audio.loop = true;
+            audio.preload = 'auto';
+            audio.style.display = 'none';
+            
+            // Add source for the audio - using local file
+            const source = document.createElement('source');
+            source.src = '_audio.mp3';
+            source.type = 'audio/mpeg';
+            
+            audio.appendChild(source);
+            container.appendChild(audio);
+            
+            // Store reference to audio element
+            window.backgroundAudio = audio;
+            
+            // Add listener for user interaction to enable audio
+            document.addEventListener('click', function userInteractionHandler() {
+                // Only trigger once
+                document.removeEventListener('click', userInteractionHandler);
+                
+                // Try to play audio automatically after first user interaction
+                const audio = window.backgroundAudio;
+                if (audio) {
+                    const playPromise = audio.play();
+                    
+                    if (playPromise !== undefined) {
+                        playPromise.then(_ => {
+                            // Playback started successfully
+                            musicPlaying = true;
+                            updateMusicButton(true);
+                        })
+                        .catch(error => {
+                            // Auto-play was prevented
+                            console.log("Playback prevented by browser. User interaction required.", error);
+                            musicPlaying = false;
+                            updateMusicButton(false);
+                        });
+                    }
+                }
+                
+                // Show the music button
+                const musicBtn = document.getElementById('musicToggle');
+                if (musicBtn) {
+                    musicBtn.style.display = 'block';
+                }
+            }, { once: true });
+        }
+        
+        // Toggles music on/off
+        function toggleBackgroundMusic() {
+            const audio = window.backgroundAudio;
+            const musicBtn = document.getElementById('musicToggle');
+            
+            if (!audio) return;
+            
+            musicPlaying = !musicPlaying;
+            
+            if (musicPlaying) {
+                // Play audio
+                const playPromise = audio.play();
+                
+                // Handle play promise (required for modern browsers)
+                if (playPromise !== undefined) {
+                    playPromise.then(_ => {
+                        // Playback started successfully
+                        updateMusicButton(true);
+                    })
+                    .catch(error => {
+                        // Auto-play was prevented
+                        console.log("Playback prevented by browser. User interaction required.", error);
+                        musicPlaying = false;
+                        updateMusicButton(false);
+                    });
+                }
+            } else {
+                // Pause audio
+                audio.pause();
+                updateMusicButton(false);
+            }
+        }
+        
+        // Update button appearance
+        function updateMusicButton(isPlaying) {
+            const musicBtn = document.getElementById('musicToggle');
+            if (!musicBtn) return;
+            
+            if (isPlaying) {
+                musicBtn.innerHTML = '🎵 Music On';
+                musicBtn.classList.remove('music-off');
+                musicBtn.classList.add('music-on');
+            } else {
+                musicBtn.innerHTML = '🔇 Music Off';
+                musicBtn.classList.remove('music-on');
+                musicBtn.classList.add('music-off');
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <!-- Hidden player container -->
+    <div id="backgroundMusic"></div>
+    
+    <!-- Music control button -->
+    <button id="musicToggle" class="music-control music-off" style="display: none;">🔇 Music Off</button>
+    
+    <header class="header">
+        <div class="profile-picture">
+            <img src="profile.jpeg" alt="Micael Santana">
+        </div>
+        <h1>Micael Santana</h1>
+        <h2>Senior Software Engineer</h2>
+        <div class="contact-info">
+            <p>📍 Blumenau, Santa Catarina, Brazil | 📞 <a href="https://api.whatsapp.com/send?phone=5547996428339" target="_blank">+55 47 996428339</a></p>
+            <p>📧 micaelparadox@gmail.com | 🔗 <a href="https://linkedin.com/in/micasan">linkedin.com/in/micasan</a></p>
+        </div>
+    </header>
+
+    <section class="summary">
+        <h3>Summary</h3>
+        <p>Senior Software Engineer with over 11 years of experience in IT, specializing in Cloud Computing, Data Engineering, Cybersecurity, and Legacy Modernization. Proven expertise in Java, Microservices, Spring Boot, Apache Beam, Airflow, and GCP Dataflow, delivering high-performance distributed systems in agile and DevOps-driven environments. Adept at building scalable, secure architectures and optimizing CI/CD pipelines to improve development efficiency.</p>
+    </section>
+
+    <section class="skills">
+        <h3>Technical Skills</h3>
+        <div class="skill-categories">
+            <div>
+                <h4>Proficient</h4>
+                <p>Java, Spring Boot, Kubernetes, Docker, AWS, Apache Spark, Apache Beam, Apache Airflow, GCP Dataflow, PostgreSQL</p>
+            </div>
+            <div>
+                <h4>Intermediate</h4>
+                <p>React, PHP, Laravel, Angular, Python</p>
+            </div>
+            <div>
+                <h4>Beginner</h4>
+                <p>FastAPI, Flask, Go</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="experience">
+        <h3>Professional Experience</h3>
+
+        <!-- SAP -->
+        <article class="job">
+            <div class="job-header">
+                <h4><span class="notranslate">SAP</span></h4>
+                <span class="duration">10/2023 - Present</span>
+            </div>
+            <p class="location">United States – Remote</p>
+            <ul>
+                <li>Optimized financial transaction processing and risk assessment by 75%, integrating middleware with SAP S/4HANA Finance and SAP FSCM (Financial Supply Chain Management)</li>
+                <li>Developed scalable APIs to enable seamless communication between SAP ERP modules and external banking systems</li>
+                <li>Implemented CI/CD pipelines, streamlining deployments for SAP-based applications and enhancing system reliability</li>
+                <li>Ensured secure and efficient operations using JBoss EAP, SSH, and Bash, improving integration with SAP's enterprise landscape</li>
+                <li>Monitored and optimized system performance using Dynatrace, ensuring stability and responsiveness of critical SAP financial applications</li>
+            </ul>
+            <p class="technologies"><strong>Technologies:</strong> Java, Spring Framework, SAP S/4HANA, SAP FSCM, API Development, CI/CD, JBoss EAP, Secure Shell (SSH), Bash, Dynatrace, Microservices</p>
+        </article>
+
+        <!-- Mercedes-Benz -->
+        <article class="job">
+            <div class="job-header">
+                <h4><span class="notranslate">Mercedes-Benz AG</span></h4>
+                <span class="duration">11/2017 - 10/2023</span>
+            </div>
+            <p class="location">Germany – Remote</p>
+            <ul>
+                <li>Automated deployment processes across 100+ microservices, increasing productivity by 25%</li>
+                <li>Spearheaded the migration of legacy COBOL systems to Java, reducing downtime and enhancing operational processes</li>
+                <li>Implemented robust security protocols and compliance standards (SOC2, GDPR) across microservices architecture, reducing vulnerability risks by 40%</li>
+                <li>Led a team of 5 engineers in developing cloud-native applications, improving service reliability from 99.5% to 99.9%</li>
+                <li>Collaborated with cross-functional teams to integrate automotive systems with cloud services, enhancing vehicle connectivity features</li>
+            </ul>
+            <p class="technologies"><strong>Technologies:</strong> Java, Python, Go, Apache Kafka, Apache Beam, Kubernetes, GCP Dataflow, AWS, Docker, CI/CD, Terraform</p>
+        </article>
+
+        <!-- Grupo Dataclick -->
+        <article class="job">
+            <div class="job-header">
+                <h4><span class="notranslate">Grupo Dataclick</span></h4>
+                <span class="duration">10/2015 - 11/2017</span>
+            </div>
+            <p class="location">Itajaí, Brazil – Remote</p>
+            <ul>
+                <li>Designed and deployed a secure internal payment gateway, improving transaction success rates by 40%</li>
+                <li>Enhanced customer satisfaction, leading to the adoption of the solution by over 1,500 clients</li>
+                <li>Built and optimized robust APIs, integrating banking applications and payment systems</li>
+                <li>Optimized data pipelines with Apache Airflow, reducing data processing latency</li>
+            </ul>
+            <p class="technologies"><strong>Technologies:</strong> PHP, Laravel, PostgreSQL, SQL, Airflow</p>
+        </article>
+
+        <!-- CTIS Tecnologia -->
+        <article class="job">
+            <div class="job-header">
+                <h4><span class="notranslate">CTIS Tecnologia</span></h4>
+                <span class="duration">03/2012 - 10/2015</span>
+            </div>
+            <p class="location">Brazil</p>
+            <ul>
+                <li>Delivered full-stack development for web-based applications, utilizing Java, JSP, and MySQL</li>
+                <li>Improved user experience by implementing modern HTML and CSS standards, increasing system usability</li>
+                <li>Supported the development of critical enterprise systems, ensuring high-quality code and performance</li>
+            </ul>
+            <p class="technologies"><strong>Technologies:</strong> Java, MySQL, JSP</p>
+        </article>
+    </section>
+
+    <section class="education">
+        <h3>Education</h3>
+        <div class="education-item">
+            <h4>Bachelor of Computer Science</h4>
+            <p>Universidade do Vale do Itajaí, Santa Catarina, Brazil · Jan 2015 - Dec 2019</p>
+            <p><em>Started career in technology with strong practical experience before formalizing education while continuing to work full-time</em></p>
+        </div>
+    </section>
+
+    <section class="certifications">
+        <h3>Certifications</h3>
+        <p>AWS Certified Solutions Architect – Associate (04/2024)</p>
+    </section>
+
+    <section class="languages">
+        <h3>Languages</h3>
+        <p>Portuguese: Native</p>
+        <p>English: C1 Level (Full Professional)</p>
+    </section>
+
+    <section class="career-metrics">
+        <h3>Career Growth Metrics</h3>
+        <div class="chart-container">
+            <canvas id="careerChart"></canvas>
+        </div>
+    </section>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ctx = document.getElementById('careerChart').getContext('2d');
+            
+            const careerChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
+                    datasets: [
+                        {
+                            label: 'Technical Complexity',
+                            data: [30, 35, 40, 45, 55, 65, 72, 78, 83, 87, 90, 92, 95],
+                            borderColor: '#88c0d0',
+                            backgroundColor: 'rgba(136, 192, 208, 0.2)',
+                            tension: 0.3,
+                            fill: true
+                        },
+                        {
+                            label: 'Leadership Responsibility',
+                            data: [10, 15, 20, 25, 30, 40, 55, 65, 70, 75, 80, 85, 90],
+                            borderColor: '#ebcb8b',
+                            backgroundColor: 'rgba(235, 203, 139, 0.2)',
+                            tension: 0.3,
+                            fill: true
+                        },
+                        {
+                            label: 'Cloud Expertise',
+                            data: [0, 5, 10, 20, 35, 50, 65, 70, 75, 80, 85, 90, 95],
+                            borderColor: '#a3be8c',
+                            backgroundColor: 'rgba(163, 190, 140, 0.2)',
+                            tension: 0.3,
+                            fill: true
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'top',
+                            labels: {
+                                color: '#e0e0e0'
+                            }
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100,
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#e0e0e0'
+                            }
+                        },
+                        x: {
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            },
+                            ticks: {
+                                color: '#e0e0e0'
+                            }
+                        }
+                    },
+                    animation: {
+                        duration: 2000,
+                        easing: 'easeOutQuart'
+                    }
+                }
+            });
+        });
+    </script>
+
+    <footer>
+        <p>© 2024 Micael Santana</p>
+    </footer>
+</body>
+
+</html>
