@@ -4,14 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description"
-        content="Senior Software Engineer specializing in Cloud Computing, Data Engineering, Cybersecurity, and Legacy Modernization. Expert in Java, Microservices, Spring Boot, Apache Beam, and GCP Dataflow.">
-    <meta name="keywords"
-        content="Software Engineer, Java, Spring Boot, Kubernetes, AWS, Cloud Computing, Data Engineering, Microservices, Cybersecurity, Legacy Modernization">
+    <meta name="description" content="Senior Software Engineer specializing in Cloud Computing, Data Engineering, Cybersecurity, and Legacy Modernization. Expert in Java, Microservices, Spring Boot, Apache Beam, and GCP Dataflow.">
+    <meta name="keywords" content="Software Engineer, Java, Spring Boot, Kubernetes, AWS, Cloud Computing, Data Engineering, Microservices, Cybersecurity, Legacy Modernization">
     <meta name="author" content="Micael Santana">
     <meta property="og:title" content="Micael Santana - Senior Software Engineer">
-    <meta property="og:description"
-        content="Senior Software Engineer with over 11 years of experience in IT, specializing in Cloud Computing, Data Engineering, Cybersecurity, and Legacy Modernization.">
+    <meta property="og:description" content="Senior Software Engineer with over 11 years of experience in IT, specializing in Cloud Computing, Data Engineering, Cybersecurity, and Legacy Modernization.">
     <meta property="og:image" content="profile.jpeg">
     <meta property="og:url" content="https://linkedin.com/in/micasan">
     <meta name="robots" content="index, follow">
@@ -20,6 +17,33 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Micael Santana",
+      "jobTitle": "Senior Software Engineer",
+      "image": "profile.jpeg",
+      "url": "https://linkedin.com/in/micasan",
+      "email": "micaelparadox@gmail.com",
+      "telephone": "+55 47 996428339",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Blumenau",
+        "addressRegion": "Santa Catarina",
+        "addressCountry": "Brazil"
+      },
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Universidade do Vale do Itajaí"
+      },
+      "worksFor": {
+        "@type": "Organization",
+        "name": "SAP"
+      },
+      "knowsAbout": ["Java", "Spring Boot", "Kubernetes", "Docker", "AWS", "Apache Spark", "Apache Beam", "Apache Airflow", "GCP Dataflow", "PostgreSQL", "Cloud Computing", "Data Engineering", "Cybersecurity", "Legacy Modernization"]
+    }
+    </script>
 </head>
 
 <body>
@@ -170,7 +194,10 @@
                             borderColor: '#88c0d0',
                             backgroundColor: 'rgba(136, 192, 208, 0.2)',
                             tension: 0.3,
-                            fill: true
+                            fill: true,
+                            pointRadius: 6,
+                            pointHoverRadius: 8,
+                            pointBackgroundColor: '#88c0d0'
                         },
                         {
                             label: 'Leadership Responsibility',
@@ -178,7 +205,10 @@
                             borderColor: '#ebcb8b',
                             backgroundColor: 'rgba(235, 203, 139, 0.2)',
                             tension: 0.3,
-                            fill: true
+                            fill: true,
+                            pointRadius: 6,
+                            pointHoverRadius: 8,
+                            pointBackgroundColor: '#ebcb8b'
                         },
                         {
                             label: 'Cloud Expertise',
@@ -186,7 +216,10 @@
                             borderColor: '#a3be8c',
                             backgroundColor: 'rgba(163, 190, 140, 0.2)',
                             tension: 0.3,
-                            fill: true
+                            fill: true,
+                            pointRadius: 6,
+                            pointHoverRadius: 8,
+                            pointBackgroundColor: '#a3be8c'
                         }
                     ]
                 },
@@ -197,12 +230,35 @@
                         legend: {
                             position: 'top',
                             labels: {
-                                color: '#e0e0e0'
+                                color: '#e0e0e0',
+                                padding: 20,
+                                font: {
+                                    family: 'Ubuntu',
+                                    size: 12
+                                }
                             }
                         },
                         tooltip: {
                             mode: 'index',
-                            intersect: false
+                            intersect: false,
+                            backgroundColor: 'rgba(46, 46, 46, 0.9)',
+                            titleFont: {
+                                family: 'Ubuntu',
+                                size: 14,
+                                weight: 'bold'
+                            },
+                            bodyFont: {
+                                family: 'Ubuntu',
+                                size: 13
+                            },
+                            padding: 12,
+                            cornerRadius: 6,
+                            displayColors: true,
+                            callbacks: {
+                                label: function(context) {
+                                    return context.dataset.label + ': ' + context.parsed.y + '%';
+                                }
+                            }
                         }
                     },
                     scales: {
@@ -213,7 +269,13 @@
                                 color: 'rgba(255, 255, 255, 0.1)'
                             },
                             ticks: {
-                                color: '#e0e0e0'
+                                color: '#e0e0e0',
+                                font: {
+                                    family: 'Ubuntu'
+                                },
+                                callback: function(value) {
+                                    return value + '%';
+                                }
                             }
                         },
                         x: {
@@ -221,13 +283,20 @@
                                 color: 'rgba(255, 255, 255, 0.1)'
                             },
                             ticks: {
-                                color: '#e0e0e0'
+                                color: '#e0e0e0',
+                                font: {
+                                    family: 'Ubuntu'
+                                }
                             }
                         }
                     },
                     animation: {
                         duration: 2000,
                         easing: 'easeOutQuart'
+                    },
+                    interaction: {
+                        intersect: false,
+                        mode: 'nearest'
                     }
                 }
             });

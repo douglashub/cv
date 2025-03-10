@@ -6,34 +6,69 @@
     line-height: 1.6;
 }
 
+:root {
+    --bg-color: #2e2e2e;
+    --text-color: #e0e0e0;
+    --border-color: #555;
+    --primary-color: #88c0d0;
+    --secondary-color: #61afef;
+    --header-color: #ffffff;
+    --subheader-color: #c0c0c0;
+}
+
 body {
     max-width: 1200px;
     margin: 0 auto;
     padding: 20px;
-    background: #2e2e2e;
-    color: #e0e0e0;
+    background: var(--bg-color);
+    color: var(--text-color);
     font-family: 'Ubuntu', sans-serif;
     font-weight: 400;
+    transition: all 0.3s ease;
 }
 
 .header {
     text-align: center;
     margin-bottom: 2rem;
     padding-bottom: 1rem;
-    border-bottom: 2px solid #555;
+    border-bottom: 2px solid var(--border-color);
+    opacity: 0;
+    transform: translateY(-20px);
+    animation: fadeInDown 0.6s ease forwards;
+}
+
+@keyframes fadeInDown {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+section {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease forwards;
+    animation-delay: calc(var(--section-index, 0) * 0.2s);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 h1 {
     font-size: 2.8rem;
     margin-bottom: 0.5rem;
-    color: #ffffff;
+    color: var(--header-color);
     font-family: 'Ubuntu', sans-serif;
     font-weight: 700;
 }
 
 h2 {
     font-size: 1.6rem;
-    color: #c0c0c0;
+    color: var(--subheader-color);
     font-family: 'Ubuntu', sans-serif;
     font-weight: 700;
 }
@@ -41,9 +76,9 @@ h2 {
 h3 {
     font-size: 1.5rem;
     margin: 2rem 0 1rem;
-    border-bottom: 1px solid #555;
+    border-bottom: 1px solid var(--border-color);
     padding-bottom: 0.5rem;
-    color: #ffffff;
+    color: var(--header-color);
     font-family: 'Ubuntu', sans-serif;
     font-weight: 700;
 }
@@ -60,13 +95,14 @@ p, li {
 
 a {
     text-decoration: none;
-    border-bottom: 1px solid #888;
-    color: #88c0d0;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--primary-color);
     font-family: 'Ubuntu', sans-serif;
+    transition: color 0.3s ease;
 }
 
 a:hover {
-    color: #61afef;
+    color: var(--secondary-color);
 }
 
 .contact-info {
@@ -84,6 +120,11 @@ a:hover {
     position: relative;
     padding-left: 30px;
     margin: 2rem 0;
+    transition: transform 0.3s ease;
+}
+
+.job:hover {
+    transform: translateX(5px);
 }
 
 .job::before {
@@ -93,7 +134,7 @@ a:hover {
     top: 0;
     width: 2px;
     height: 100%;
-    background: #555;
+    background: var(--border-color);
 }
 
 .job::after {
@@ -103,9 +144,14 @@ a:hover {
     top: 10px;
     width: 20px;
     height: 20px;
-    background: #2e2e2e;
-    border: 2px solid #88c0d0;
+    background: var(--bg-color);
+    border: 2px solid var(--primary-color);
     border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.job:hover::after {
+    transform: scale(1.2);
 }
 
 .job-header {
@@ -130,7 +176,7 @@ footer {
     text-align: center;
     margin-top: 3rem;
     padding: 1rem;
-    border-top: 1px solid #555;
+    border-top: 1px solid var(--border-color);
     color: #888;
 }
 
@@ -160,7 +206,12 @@ footer {
     border-radius: 50%;
     overflow: hidden;
     margin: 0 auto 15px;
-    border: 4px solid #88c0d0;
+    border: 4px solid var(--primary-color);
+    transition: transform 0.3s ease;
+}
+
+.profile-picture:hover {
+    transform: scale(1.05);
 }
 
 .profile-picture img {
@@ -171,19 +222,40 @@ footer {
 }
 
 .notranslate {
-    display: inline-block; /* Maintains proper spacing */
+    display: inline-block;
 }
 
 .chart-container {
     position: relative;
-    height: 300px; /* Reduced height from 400px to 300px */
+    height: 300px;
     width: 100%;
     margin: 15px 0;
+    transition: transform 0.3s ease;
 }
 
-.career-metrics {
-    background-color: #2a2a2a; /* Darker background, less contrast */
-    padding: 15px; /* Reduced padding */
-    border-radius: 6px; /* Smaller border radius */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* Subtler shadow */
+.chart-container:hover {
+    transform: scale(1.02);
+}
+
+@media print {
+    body {
+        background: white;
+        color: black;
+        padding: 20px;
+    }
+
+    .chart-container {
+        page-break-inside: avoid;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+        border-bottom: none;
+    }
+
+    .job::before,
+    .job::after {
+        display: none;
+    }
 }
