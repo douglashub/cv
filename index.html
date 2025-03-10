@@ -17,6 +17,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <link rel="alternate" hreflang="en" href="https://linkedin.com/in/micasan">
+    <link rel="alternate" hreflang="pt" href="https://linkedin.com/in/micasan?lang=pt">
+    <link rel="alternate" hreflang="es" href="https://linkedin.com/in/micasan?lang=es">
+    <script src="translations.js"></script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -52,52 +56,58 @@
             <img src="profile.jpeg" alt="Micael Santana">
         </div>
         <h1>Micael Santana</h1>
-        <h2>Senior Software Engineer</h2>
+        <h2 data-i18n="header.title">Senior Software Engineer</h2>
         <div class="contact-info">
             <p>📍 Blumenau, Santa Catarina, Brazil | 📞 <a href="https://api.whatsapp.com/send?phone=5547996428339" target="_blank">+55 47 996428339</a></p>
             <p>📧 micaelparadox@gmail.com | 🔗 <a href="https://linkedin.com/in/micasan">linkedin.com/in/micasan</a></p>
         </div>
+        <div class="language-selector">
+            <select id="languageSelector" onchange="setLanguage(this.value)">
+                <option value="en">English</option>
+                <option value="pt">Português</option>
+            </select>
+        </div>
     </header>
 
     <section class="summary">
-        <h3>Summary</h3>
-        <p>Senior Software Engineer with over 11 years of experience in IT, specializing in Cloud Computing, Data Engineering, Cybersecurity, and Legacy Modernization. Proven expertise in Java, Microservices, Spring Boot, Apache Beam, Airflow, and GCP Dataflow, delivering high-performance distributed systems in agile and DevOps-driven environments. Adept at building scalable, secure architectures and optimizing CI/CD pipelines to improve development efficiency.</p>
+        <h3 data-i18n="summary.title">Summary</h3>
+        <p data-i18n="summary.content">Senior Software Engineer with over 11 years of experience in IT, specializing in Cloud Computing, Data Engineering, Cybersecurity, and Legacy Modernization. Proven expertise in Java, Microservices, Spring Boot, Apache Beam, Airflow, and GCP Dataflow, delivering high-performance distributed systems in agile and DevOps-driven environments. Adept at building scalable, secure architectures and optimizing CI/CD pipelines to improve development efficiency.</p>
     </section>
 
     <section class="skills">
-        <h3>Technical Skills</h3>
+        <h3 data-i18n="skills.title">Technical Skills</h3>
         <div class="skill-categories">
             <div>
-                <h4>Proficient</h4>
+                <h4 data-i18n="skills.proficient">Proficient</h4>
                 <p>Java, Spring Boot, Kubernetes, Docker, AWS, Apache Spark, Apache Beam, Apache Airflow, GCP Dataflow, PostgreSQL</p>
             </div>
             <div>
-                <h4>Intermediate</h4>
+                <h4 data-i18n="skills.intermediate">Intermediate</h4>
                 <p>React, PHP, Laravel, Angular, Python</p>
             </div>
             <div>
-                <h4>Beginner</h4>
+                <h4 data-i18n="skills.beginner">Beginner</h4>
                 <p>FastAPI, Flask, Go</p>
             </div>
         </div>
     </section>
 
     <section class="experience">
-        <h3>Professional Experience</h3>
+        <h3 data-i18n="experience.title">Professional Experience</h3>
 
         <!-- SAP -->
         <article class="job">
             <div class="job-header">
                 <h4><span class="notranslate">SAP</span></h4>
-                <span class="duration">10/2023 - Present</span>
+                <span class="duration">10/2023 - <span data-i18n="experience.present">Present</span></span>
             </div>
-            <p class="location">United States – Remote</p>
+            <p class="location">United States – <span data-i18n="experience.remote">Remote</span></p>
             <ul>
-                <li>Optimized financial transaction processing and risk assessment by 75%, integrating middleware with SAP S/4HANA Finance and SAP FSCM (Financial Supply Chain Management)</li>
-                <li>Developed scalable APIs to enable seamless communication between SAP ERP modules and external banking systems</li>
-                <li>Implemented CI/CD pipelines, streamlining deployments for SAP-based applications and enhancing system reliability</li>
-                <li>Ensured secure and efficient operations using JBoss EAP, SSH, and Bash, improving integration with SAP's enterprise landscape</li>
-                <li>Monitored and optimized system performance using Dynatrace, ensuring stability and responsiveness of critical SAP financial applications</li>
+                <li data-i18n="experience.sap.desc1">Optimized financial transaction processing and risk assessment by 75%, integrating middleware with SAP S/4HANA Finance and SAP FSCM (Financial Supply Chain Management)</li>
+                <li data-i18n="experience.sap.desc2">Developed scalable APIs to enable seamless communication between SAP ERP modules and external banking systems</li>
+                <li data-i18n="experience.sap.desc3">Implemented CI/CD pipelines, streamlining deployments for SAP-based applications and enhancing system reliability</li>
+                <li data-i18n="experience.sap.desc4">Ensured secure and efficient operations using JBoss EAP, SSH, and Bash, improving integration with SAP's enterprise landscape</li>
+                <li data-i18n="experience.sap.desc5">Monitored and optimized system performance using Dynatrace, ensuring stability and responsiveness of critical SAP financial applications</li>
             </ul>
             <p class="technologies"><strong>Technologies:</strong> Java, Spring Framework, SAP S/4HANA, SAP FSCM, API Development, CI/CD, JBoss EAP, Secure Shell (SSH), Bash, Dynatrace, Microservices</p>
         </article>
@@ -108,13 +118,13 @@
                 <h4><span class="notranslate">Mercedes-Benz AG</span></h4>
                 <span class="duration">11/2017 - 10/2023</span>
             </div>
-            <p class="location">Germany – Remote</p>
+            <p class="location">Germany – <span data-i18n="experience.remote">Remote</span></p>
             <ul>
-                <li>Automated deployment processes across 100+ microservices, increasing productivity by 25%</li>
-                <li>Spearheaded the migration of legacy COBOL systems to Java, reducing downtime and enhancing operational processes</li>
-                <li>Implemented robust security protocols and compliance standards (SOC2, GDPR) across microservices architecture, reducing vulnerability risks by 40%</li>
-                <li>Led a team of 5 engineers in developing cloud-native applications, improving service reliability from 99.5% to 99.9%</li>
-                <li>Collaborated with cross-functional teams to integrate automotive systems with cloud services, enhancing vehicle connectivity features</li>
+                <li data-i18n="experience.mercedes.desc1">Automated deployment processes across 100+ microservices, increasing productivity by 25%</li>
+                <li data-i18n="experience.mercedes.desc2">Spearheaded the migration of legacy COBOL systems to Java, reducing downtime and enhancing operational processes</li>
+                <li data-i18n="experience.mercedes.desc3">Implemented robust security protocols and compliance standards (SOC2, GDPR) across microservices architecture, reducing vulnerability risks by 40%</li>
+                <li data-i18n="experience.mercedes.desc4">Led a team of 5 engineers in developing cloud-native applications, improving service reliability from 99.5% to 99.9%</li>
+                <li data-i18n="experience.mercedes.desc5">Collaborated with cross-functional teams to integrate automotive systems with cloud services, enhancing vehicle connectivity features</li>
             </ul>
             <p class="technologies"><strong>Technologies:</strong> Java, Python, Go, Apache Kafka, Apache Beam, Kubernetes, GCP Dataflow, AWS, Docker, CI/CD, Terraform</p>
         </article>
@@ -125,12 +135,12 @@
                 <h4><span class="notranslate">Grupo Dataclick</span></h4>
                 <span class="duration">10/2015 - 11/2017</span>
             </div>
-            <p class="location">Itajaí, Brazil – Remote</p>
+            <p class="location">Itajaí, Brazil – <span data-i18n="experience.remote">Remote</span></p>
             <ul>
-                <li>Designed and deployed a secure internal payment gateway, improving transaction success rates by 40%</li>
-                <li>Enhanced customer satisfaction, leading to the adoption of the solution by over 1,500 clients</li>
-                <li>Built and optimized robust APIs, integrating banking applications and payment systems</li>
-                <li>Optimized data pipelines with Apache Airflow, reducing data processing latency</li>
+                <li data-i18n="experience.dataclick.desc1">Designed and deployed a secure internal payment gateway, improving transaction success rates by 40%</li>
+                <li data-i18n="experience.dataclick.desc2">Enhanced customer satisfaction, leading to the adoption of the solution by over 1,500 clients</li>
+                <li data-i18n="experience.dataclick.desc3">Built and optimized robust APIs, integrating banking applications and payment systems</li>
+                <li data-i18n="experience.dataclick.desc4">Optimized data pipelines with Apache Airflow, reducing data processing latency</li>
             </ul>
             <p class="technologies"><strong>Technologies:</strong> PHP, Laravel, PostgreSQL, SQL, Airflow</p>
         </article>
@@ -143,36 +153,36 @@
             </div>
             <p class="location">Brazil</p>
             <ul>
-                <li>Delivered full-stack development for web-based applications, utilizing Java, JSP, and MySQL</li>
-                <li>Improved user experience by implementing modern HTML and CSS standards, increasing system usability</li>
-                <li>Supported the development of critical enterprise systems, ensuring high-quality code and performance</li>
+                <li data-i18n="experience.ctis.desc1">Delivered full-stack development for web-based applications, utilizing Java, JSP, and MySQL</li>
+                <li data-i18n="experience.ctis.desc2">Improved user experience by implementing modern HTML and CSS standards, increasing system usability</li>
+                <li data-i18n="experience.ctis.desc3">Supported the development of critical enterprise systems, ensuring high-quality code and performance</li>
             </ul>
             <p class="technologies"><strong>Technologies:</strong> Java, MySQL, JSP</p>
         </article>
     </section>
 
     <section class="education">
-        <h3>Education</h3>
+        <h3 data-i18n="education.title">Education</h3>
         <div class="education-item">
-            <h4>Bachelor of Computer Science</h4>
+            <h4 data-i18n="education.degree">Bachelor of Computer Science</h4>
             <p>Universidade do Vale do Itajaí, Santa Catarina, Brazil · Jan 2015 - Dec 2019</p>
-            <p><em>Started career in technology with strong practical experience before formalizing education while continuing to work full-time</em></p>
+            <p><em data-i18n="education.note">Started career in technology with strong practical experience before formalizing education while continuing to work full-time</em></p>
         </div>
     </section>
 
     <section class="certifications">
-        <h3>Certifications</h3>
+        <h3 data-i18n="certifications.title">Certifications</h3>
         <p>AWS Certified Solutions Architect – Associate (04/2024)</p>
     </section>
 
     <section class="languages">
-        <h3>Languages</h3>
+        <h3 data-i18n="languages.title">Languages</h3>
         <p>Portuguese: Native</p>
         <p>English: C1 Level (Full Professional)</p>
     </section>
 
     <section class="career-metrics">
-        <h3>Career Growth Metrics</h3>
+        <h3 data-i18n="metrics.title">Career Growth Metrics</h3>
         <div class="chart-container">
             <canvas id="careerChart"></canvas>
         </div>
@@ -189,7 +199,7 @@
                     labels: ['2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024'],
                     datasets: [
                         {
-                            label: 'Technical Complexity',
+                            label: document.querySelector('[data-i18n="chart.technical"]')?.textContent || 'Technical Complexity',
                             data: [30, 35, 40, 45, 55, 65, 72, 78, 83, 87, 90, 92, 95],
                             borderColor: '#88c0d0',
                             backgroundColor: 'rgba(136, 192, 208, 0.2)',
@@ -200,7 +210,7 @@
                             pointBackgroundColor: '#88c0d0'
                         },
                         {
-                            label: 'Leadership Responsibility',
+                            label: document.querySelector('[data-i18n="chart.leadership"]')?.textContent || 'Leadership Responsibility',
                             data: [10, 15, 20, 25, 30, 40, 55, 65, 70, 75, 80, 85, 90],
                             borderColor: '#ebcb8b',
                             backgroundColor: 'rgba(235, 203, 139, 0.2)',
@@ -211,7 +221,7 @@
                             pointBackgroundColor: '#ebcb8b'
                         },
                         {
-                            label: 'Cloud Expertise',
+                            label: document.querySelector('[data-i18n="chart.cloud"]')?.textContent || 'Cloud Expertise',
                             data: [0, 5, 10, 20, 35, 50, 65, 70, 75, 80, 85, 90, 95],
                             borderColor: '#a3be8c',
                             backgroundColor: 'rgba(163, 190, 140, 0.2)',
@@ -304,7 +314,7 @@
     </script>
 
     <footer>
-        <p>© 2024 Micael Santana</p>
+        <p data-i18n="footer.copyright">© 2025 Micael Santana</p>
     </footer>
 </body>
 

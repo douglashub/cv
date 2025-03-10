@@ -200,6 +200,38 @@ footer {
     }
 }
 
+.language-selector {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.language-selector select {
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Ubuntu', sans-serif;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+}
+
+.language-selector select:hover {
+    border-color: var(--primary-color);
+}
+
+.language-selector select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(var(--primary-color-rgb), 0.1);
+}
+
+.language-selector option {
+    background: var(--bg-color);
+    color: var(--text-color);
+}
+
 .profile-picture {
     width: 120px;
     height: 120px;
